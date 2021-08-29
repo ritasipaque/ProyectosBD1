@@ -34,5 +34,43 @@ fecha_producto varchar(30),
 pago_producto varchar(30),
  PRIMARY KEY (PK_id_factura,PK_Id_proveedor,PK_Id_producto)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+CREATE TABLE  acreedores (
+PK_Id_acreedores  VARCHAR(5), 
+PK_Acreedores VARCHAR(30),  
+Nit VARCHAR(30) , 
+Monto VARCHAR(30) , 
+Estatus_Acreedor TINYINT(2) , 
+telefono VARCHAR(30)  , 
+producto VARCHAR(30) ,  
+  PRIMARY KEY (PK_Id_acreedores)
+  )
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8;
+
+CREATE TABLE  Cliente (
+PK_Id_cliente  VARCHAR(5) , 
+cliente VARCHAR(30) ,  
+Nit VARCHAR(30) , 
+Estatus_Cliente TINYINT(2), 
+telefono VARCHAR(30) , 
+PRIMARY KEY (PK_Id_cliente)
+  )
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8;
+
+CREATE TABLE  Pedido_Factura (
+ PK_Id_factura VARCHAR (5),
+ Cliente  VARCHAR (30),
+Nit    VARCHAR (30),
+telefono  VARCHAR (30),
+producto   VARCHAR (30),
+Cantidad   VARCHAR (30),
+Precio_por_unidad   VARCHAR (30),
+Monto   VARCHAR (30),
+Total   VARCHAR (30),
+
+ PRIMARY KEY ( PK_Id_factura )
+);
+
 
 
