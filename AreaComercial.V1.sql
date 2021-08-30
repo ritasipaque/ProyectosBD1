@@ -72,5 +72,62 @@ Total   VARCHAR (30),
  PRIMARY KEY ( PK_Id_factura )
 );
 
+-- -----------------------------------------------------
+-- Table `areacomercialv1`.`tbl_bodega`
+-- -----------------------------------------------------
+CREATE TABLE tbl_bodega (
+   /*AÑADIR BODEGAS*/
+  PK_id_bodega  VARCHAR(5) NOT NULL,
+  nombre_bodega VARCHAR(45) NOT NULL,
+  direccion VARCHAR (45) NOT NULL,
+  codigo_bodega VARCHAR(200) NOT NULL,
+  estatus_bodega TINYINT NOT NULL,
+  
+  PRIMARY KEY (PK_id_bodega)
+  ) ENGINE = InnoDB DEFAULT CHARACTER SET = utf8;
+
+-- -----------------------------------------------------
+-- Table `areacomercialv1`.`tbl_producto`
+-- -----------------------------------------------------
+CREATE TABLE tbl_producto (
+/*creacion de producto*/
+  PK_id_producto VARCHAR(5) NOT NULL,
+   PK_id_bodega  VARCHAR(5) NOT NULL,
+  nombre_producto VARCHAR(45) NOT NULL,
+  precio_producto INT(45) NOT NULL,
+  descripcion_producto VARCHAR(45) NOT NULL,
+  existencias VARCHAR(45) NOT NULL,
+  existencia_bodega VARCHAR(45) NOT NULL,
+  fecha_ingreso DATE,
+  salida_ingreso DATE,
+  estatus_producto  TINYINT NOT NULL,
+  PRIMARY KEY (PK_id_producto, PK_id_bodega),
+  
+  FOREIGN KEY (PK_id_bodega) REFERENCES tbl_bodega (PK_id_bodega)
+  )ENGINE = InnoDB DEFAULT CHARACTER SET = utf8;
+
+-- -----------------------------------------------------
+-- Table `areacomercialv1`.`tbl_actualizacion_stock`
+-- -----------------------------------------------------
+CREATE TABLE tbl_actualizacion_stock (
+/*ACTUALIZACION DE PRODUCTO*/
+  PK_id_actualizacion_stock VARCHAR(5) NOT NULL,
+  PK_id_bodega VARCHAR(5) NOT NULL,
+  nombre_producto VARCHAR(45) NOT NULL,
+  precio_producto INT(45) NOT NULL,
+  descripcion_producto VARCHAR(45) NOT NULL,
+  existencias VARCHAR(45) NOT NULL,
+  existencia_bodega VARCHAR(45) NOT NULL,
+  fecha_ingreso DATE,
+  salida_ingreso DATE,
+  estatus_producto  TINYINT NOT NULL,
+
+PRIMARY KEY (PK_id_actualizacion_stock,
+PK_id_bodega),
+FOREIGN KEY (PK_id_bodega) REFERENCES tbl_bodega(PK_id_bodega)
+)ENGINE = InnoDB DEFAULT CHARACTER SET = utf8;
+
+
+
 
 
