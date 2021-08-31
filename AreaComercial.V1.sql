@@ -73,7 +73,7 @@ Total   VARCHAR (30),
 );
 
 -- -----------------------------------------------------
--- Table `tbl_bodega`.`areacomercialv1`
+-- Table `areacomercialv1`.`tbl_bodega`
 -- -----------------------------------------------------
 CREATE TABLE tbl_bodega (
    /*AÑADIR BODEGAS*/
@@ -86,7 +86,7 @@ CREATE TABLE tbl_bodega (
   ) ENGINE = InnoDB DEFAULT CHARACTER SET = utf8;
 
 -- -----------------------------------------------------
--- Table `tbl_producto`.`areacomercialv1`
+-- Table `areacomercialv1`.`tbl_producto`
 -- -----------------------------------------------------
 CREATE TABLE tbl_producto (
 /*creacion de producto*/
@@ -105,7 +105,7 @@ CREATE TABLE tbl_producto (
   )ENGINE = InnoDB DEFAULT CHARACTER SET = utf8;
 
 -- -----------------------------------------------------
--- Table `tbl_actualizacion_stock`.`areacomercialv1`
+-- Table `areacomercialv1`.`tbl_actualizacion_stock`
 -- -----------------------------------------------------
 CREATE TABLE tbl_actualizacion_stock (
 /*ACTUALIZACION DE PRODUCTO*/
@@ -123,8 +123,4 @@ PRIMARY KEY (PK_id_actualizacion_stock,
 PK_id_bodega),
 FOREIGN KEY (PK_id_bodega) REFERENCES tbl_bodega(PK_id_bodega)
 )ENGINE = InnoDB DEFAULT CHARACTER SET = utf8;
-
-
-
-
 
