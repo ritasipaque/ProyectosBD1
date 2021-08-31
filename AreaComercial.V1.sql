@@ -73,7 +73,7 @@ Total   VARCHAR (30),
 );
 
 -- -----------------------------------------------------
--- Table `areacomercialv1`.`tbl_bodega`
+-- Table `tbl_bodega`.`areacomercialv1`
 -- -----------------------------------------------------
 CREATE TABLE tbl_bodega (
    /*AÑADIR BODEGAS*/
@@ -82,12 +82,11 @@ CREATE TABLE tbl_bodega (
   direccion VARCHAR (45) NOT NULL,
   codigo_bodega VARCHAR(200) NOT NULL,
   estatus_bodega TINYINT NOT NULL,
-  
   PRIMARY KEY (PK_id_bodega)
   ) ENGINE = InnoDB DEFAULT CHARACTER SET = utf8;
 
 -- -----------------------------------------------------
--- Table `areacomercialv1`.`tbl_producto`
+-- Table `tbl_producto`.`areacomercialv1`
 -- -----------------------------------------------------
 CREATE TABLE tbl_producto (
 /*creacion de producto*/
@@ -102,12 +101,11 @@ CREATE TABLE tbl_producto (
   salida_ingreso DATE,
   estatus_producto  TINYINT NOT NULL,
   PRIMARY KEY (PK_id_producto, PK_id_bodega),
-  
   FOREIGN KEY (PK_id_bodega) REFERENCES tbl_bodega (PK_id_bodega)
   )ENGINE = InnoDB DEFAULT CHARACTER SET = utf8;
 
 -- -----------------------------------------------------
--- Table `areacomercialv1`.`tbl_actualizacion_stock`
+-- Table `tbl_actualizacion_stock`.`areacomercialv1`
 -- -----------------------------------------------------
 CREATE TABLE tbl_actualizacion_stock (
 /*ACTUALIZACION DE PRODUCTO*/
@@ -121,7 +119,6 @@ CREATE TABLE tbl_actualizacion_stock (
   fecha_ingreso DATE,
   salida_ingreso DATE,
   estatus_producto  TINYINT NOT NULL,
-
 PRIMARY KEY (PK_id_actualizacion_stock,
 PK_id_bodega),
 FOREIGN KEY (PK_id_bodega) REFERENCES tbl_bodega(PK_id_bodega)
