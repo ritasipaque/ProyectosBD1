@@ -1,6 +1,103 @@
 CREATE DATABASE areacomercialv1;
 USE areacomercialv1;
 
+ -- -----------------------------------------------------
+-- Table `acreedores`.`areacomercialv1`
+-- -----------------------------------------------------
+CREATE TABLE  acreedores (
+PK_Id_acreedores  VARCHAR(5), 
+PK_Acreedores VARCHAR(30),  
+Nit VARCHAR(30) , 
+Monto VARCHAR(30) , 
+Estatus_Acreedor TINYINT(2) , 
+telefono VARCHAR(30)  , 
+producto VARCHAR(30) ,  
+  PRIMARY KEY (PK_Id_acreedores)
+  )
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8;
+ -- -----------------------------------------------------
+-- Table `Cliente`.`areacomercialv1`
+-- -----------------------------------------------------
+CREATE TABLE  Cliente (
+PK_Id_cliente  VARCHAR(5) , 
+cliente VARCHAR(30) ,  
+Nit VARCHAR(30) , 
+Estatus_Cliente TINYINT(2), 
+telefono VARCHAR(30) , 
+PRIMARY KEY (PK_Id_cliente)
+  )
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8;
+ -- -----------------------------------------------------
+-- Table `Pedido_Factura`.`areacomercialv1`
+-- -----------------------------------------------------
+CREATE TABLE  Pedido_Factura (
+ PK_Id_factura VARCHAR (5),
+ Cliente  VARCHAR (30),
+Nit    VARCHAR (30),
+telefono  VARCHAR (30),
+producto   VARCHAR (30),
+Cantidad   VARCHAR (30),
+Precio_por_unidad   VARCHAR (30),
+Monto   VARCHAR (30),
+Total   VARCHAR (30),
+
+ PRIMARY KEY ( PK_Id_factura )
+);
+
+-- -----------------------------------------------------
+-- Table `bodega`.`areacomercialv1`
+-- -----------------------------------------------------
+CREATE TABLE bodega (
+   /*AÑADIR BODEGAS*/
+  PK_id_bodega  VARCHAR(5) NOT NULL,
+  nombre_bodega VARCHAR(45) NOT NULL,
+  direccion VARCHAR (45) NOT NULL,
+  codigo_bodega VARCHAR(200) NOT NULL,
+  estatus_bodega TINYINT NOT NULL,
+  PRIMARY KEY (PK_id_bodega)
+  ) ENGINE = InnoDB DEFAULT CHARACTER SET = utf8;
+
+-- -----------------------------------------------------
+-- Table `producto`.`areacomercialv1`
+-- -----------------------------------------------------
+CREATE TABLE producto (
+/*creacion de producto*/
+  PK_id_producto VARCHAR(5) NOT NULL,
+   PK_id_bodega  VARCHAR(5) NOT NULL,
+  nombre_producto VARCHAR(45) NOT NULL,
+  precio_producto INT(45) NOT NULL,
+  descripcion_producto VARCHAR(45) NOT NULL,
+  existencias VARCHAR(45) NOT NULL,
+  existencia_bodega VARCHAR(45) NOT NULL,
+  fecha_ingreso DATE,
+  salida_ingreso DATE,
+  estatus_producto  TINYINT NOT NULL,
+  PRIMARY KEY (PK_id_producto, PK_id_bodega),
+  FOREIGN KEY (PK_id_bodega) REFERENCES bodega (PK_id_bodega)
+  )ENGINE = InnoDB DEFAULT CHARACTER SET = utf8;
+
+-- -----------------------------------------------------
+-- Table `actualizacion_stock`.`areacomercialv1`
+-- -----------------------------------------------------
+CREATE TABLE actualizacion_stock (
+/*ACTUALIZACION DE PRODUCTO*/
+  PK_id_actualizacion_stock VARCHAR(5) NOT NULL,
+  PK_id_bodega VARCHAR(5) NOT NULL,
+  nombre_producto VARCHAR(45) NOT NULL,
+  precio_producto INT(45) NOT NULL,
+  descripcion_producto VARCHAR(45) NOT NULL,
+  existencias VARCHAR(45) NOT NULL,
+  existencia_bodega VARCHAR(45) NOT NULL,
+  fecha_ingreso DATE,
+  salida_ingreso DATE,
+  estatus_producto  TINYINT NOT NULL,
+PRIMARY KEY (PK_id_actualizacion_stock,
+PK_id_bodega),
+FOREIGN KEY (PK_id_bodega) REFERENCES bodega(PK_id_bodega)
+)ENGINE = InnoDB DEFAULT CHARACTER SET = utf8;
+
 -- -----------------------------------------------------
 -- Table `proveedor`.`areacomercialv1`
 -- -----------------------------------------------------
@@ -20,7 +117,7 @@ CREATE TABLE proveedor (
 -- Table `compras`.`areacomercialv1`
 -- -----------------------------------------------------
 CREATE TABLE compras (
-  PK_Id_Factura  VARCHAR(5),
+  PK_Id_factura  VARCHAR(5),
  PK_Id_proveedor  VARCHAR(5),
  nombre_proveedor varchar(30) ,
 nit_proveedor varchar(30) ,
@@ -32,95 +129,9 @@ subtotal_producto varchar(30) ,
 total_producto varchar(30) ,
 fecha_producto varchar(30),
 pago_producto varchar(30),
- PRIMARY KEY (PK_id_factura,PK_Id_proveedor,PK_Id_producto)
+ PRIMARY KEY (PK_Id_factura,PK_Id_proveedor,PK_Id_producto),
+FOREIGN KEY (PK_Id_producto) REFERENCES producto (Pk_id_producto),
+  FOREIGN KEY (PK_Id_factura) REFERENCES actualizacion_stock (PK_id_actualizacion_stock)
+  
+  
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-CREATE TABLE  acreedores (
-PK_Id_acreedores  VARCHAR(5), 
-PK_Acreedores VARCHAR(30),  
-Nit VARCHAR(30) , 
-Monto VARCHAR(30) , 
-Estatus_Acreedor TINYINT(2) , 
-telefono VARCHAR(30)  , 
-producto VARCHAR(30) ,  
-  PRIMARY KEY (PK_Id_acreedores)
-  )
-ENGINE = InnoDB
-DEFAULT CHARACTER SET = utf8;
-
-CREATE TABLE  Cliente (
-PK_Id_cliente  VARCHAR(5) , 
-cliente VARCHAR(30) ,  
-Nit VARCHAR(30) , 
-Estatus_Cliente TINYINT(2), 
-telefono VARCHAR(30) , 
-PRIMARY KEY (PK_Id_cliente)
-  )
-ENGINE = InnoDB
-DEFAULT CHARACTER SET = utf8;
-
-CREATE TABLE  Pedido_Factura (
- PK_Id_factura VARCHAR (5),
- Cliente  VARCHAR (30),
-Nit    VARCHAR (30),
-telefono  VARCHAR (30),
-producto   VARCHAR (30),
-Cantidad   VARCHAR (30),
-Precio_por_unidad   VARCHAR (30),
-Monto   VARCHAR (30),
-Total   VARCHAR (30),
-
- PRIMARY KEY ( PK_Id_factura )
-);
-
--- -----------------------------------------------------
--- Table `areacomercialv1`.`tbl_bodega`
--- -----------------------------------------------------
-CREATE TABLE tbl_bodega (
-   /*AÑADIR BODEGAS*/
-  PK_id_bodega  VARCHAR(5) NOT NULL,
-  nombre_bodega VARCHAR(45) NOT NULL,
-  direccion VARCHAR (45) NOT NULL,
-  codigo_bodega VARCHAR(200) NOT NULL,
-  estatus_bodega TINYINT NOT NULL,
-  PRIMARY KEY (PK_id_bodega)
-  ) ENGINE = InnoDB DEFAULT CHARACTER SET = utf8;
-
--- -----------------------------------------------------
--- Table `areacomercialv1`.`tbl_producto`
--- -----------------------------------------------------
-CREATE TABLE tbl_producto (
-/*creacion de producto*/
-  PK_id_producto VARCHAR(5) NOT NULL,
-   PK_id_bodega  VARCHAR(5) NOT NULL,
-  nombre_producto VARCHAR(45) NOT NULL,
-  precio_producto INT(45) NOT NULL,
-  descripcion_producto VARCHAR(45) NOT NULL,
-  existencias VARCHAR(45) NOT NULL,
-  existencia_bodega VARCHAR(45) NOT NULL,
-  fecha_ingreso DATE,
-  salida_ingreso DATE,
-  estatus_producto  TINYINT NOT NULL,
-  PRIMARY KEY (PK_id_producto, PK_id_bodega),
-  FOREIGN KEY (PK_id_bodega) REFERENCES tbl_bodega (PK_id_bodega)
-  )ENGINE = InnoDB DEFAULT CHARACTER SET = utf8;
-
--- -----------------------------------------------------
--- Table `areacomercialv1`.`tbl_actualizacion_stock`
--- -----------------------------------------------------
-CREATE TABLE tbl_actualizacion_stock (
-/*ACTUALIZACION DE PRODUCTO*/
-  PK_id_actualizacion_stock VARCHAR(5) NOT NULL,
-  PK_id_bodega VARCHAR(5) NOT NULL,
-  nombre_producto VARCHAR(45) NOT NULL,
-  precio_producto INT(45) NOT NULL,
-  descripcion_producto VARCHAR(45) NOT NULL,
-  existencias VARCHAR(45) NOT NULL,
-  existencia_bodega VARCHAR(45) NOT NULL,
-  fecha_ingreso DATE,
-  salida_ingreso DATE,
-  estatus_producto  TINYINT NOT NULL,
-PRIMARY KEY (PK_id_actualizacion_stock,
-PK_id_bodega),
-FOREIGN KEY (PK_id_bodega) REFERENCES tbl_bodega(PK_id_bodega)
-)ENGINE = InnoDB DEFAULT CHARACTER SET = utf8;
-
