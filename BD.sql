@@ -534,53 +534,87 @@ FOREIGN KEY (`PK_id_piso`) REFERENCES `tbl_piso`(`PK_id_piso`),
 FOREIGN KEY (`PK_id_horario`) REFERENCES `tbl_horario`(`PK_id_horario`)
 ) ENGINE = InnoDB DEFAULT CHARACTER SET = utf8mb4;
 
-/*AREA COMERCIAL*/
+-- ----------------------------------------------------
+-- ------------ AREA COMERCIAL ------------------------
+-- ----------------------------------------------------
 
 -- -----------------------------------------------------
 -- Table `empresarial`.`linea`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `empresarial`.`tbl_linea` (
- `PK_codigo_linea` INT NULL DEFAULT NULL,
+ `PK_codigo_linea` INT  NOT NULL,
    `nombre_linea` VARCHAR(35) NULL DEFAULT NULL,
   `estatus_linea` TINYINT(2) NOT NULL,
   PRIMARY KEY (`PK_codigo_linea`))
 
 ENGINE = InnoDB DEFAULT CHARACTER SET = utf8mb4;
+
+INSERT INTO `empresarial`.`tbl_linea` 
+VALUES 
+('1', 'blanca', '1'),
+ ('2', 'electronica', '1'),
+ ('3', 'deportiva', '1'),
+ ('4', 'cosmeticos', '1');
+
 -- -----------------------------------------------------
 -- Table `administracion`.`marca`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `empresarial`.`tbl_marca` (
- `PK_codigo_marca` INT NULL DEFAULT NULL,
+ `PK_codigo_marca` INT  NOT NULL,
    `nombre_marca` VARCHAR(35) NULL DEFAULT NULL,
   `estatus_marca` TINYINT(2) NOT NULL,
   PRIMARY KEY (`PK_codigo_marca`))
 ENGINE = InnoDB DEFAULT CHARACTER SET = utf8mb4;
 
+INSERT INTO `empresarial`.`tbl_marca` 
+VALUES 
+ ('1', 'cocacola', '1'),
+ ('2', 'señorial', '1'),
+('3', 'lala', '1'),
+ ('4', 'sears', '1'),
+('5', 'kerns', '1');
+
 -- -----------------------------------------------------
 -- Table `administracion`.`bodega`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `empresarial`.`tbl_bodega` (
- `PK_codigo_bodega` INT NULL DEFAULT NULL,
+ `PK_codigo_bodega` INT  NOT NULL,
    `nombre_bodega` VARCHAR(35) NULL DEFAULT NULL,
   `estatus_bodega` TINYINT(2) NOT NULL,
   PRIMARY KEY (`PK_codigo_bodega`))
 ENGINE = InnoDB DEFAULT CHARACTER SET = utf8mb4;
 
+INSERT INTO
+ `empresarial`.`tbl_bodega` 
+ VALUES
+ ('1', 'zona1', '1'),
+ ('2', 'zona3', '1'),
+ ('3', 'zona10', '1'),
+ ('4', 'central', '1');
+
+
 -- -----------------------------------------------------
 -- Table `administracion`.`unidad`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `empresarial`.`tbl_unidad` (
- `PK_codigo_unidad` INT NULL DEFAULT NULL, /*1*/
- `nombre_unidad` VARCHAR(35) NULL DEFAULT NULL, /*2*/
- `medida_acronimo` VARCHAR(35) NULL DEFAULT NULL, /*litros*/ /*litros lts. libras lbr, gramos*/
+ `PK_codigo_unidad` INT  NOT NULL,
+ `nombre_unidad` VARCHAR(35) NULL DEFAULT NULL, 
+ `medida_acronimo` VARCHAR(35) NULL DEFAULT NULL, 
+ `estatus_unidad` TINYINT(2) NOT NULL,
   PRIMARY KEY (`PK_codigo_unidad`))
 ENGINE = InnoDB DEFAULT CHARACTER SET = utf8mb4;
+
+INSERT INTO `empresarial`.`tbl_unidad` 
+VALUES 
+('1', 'litros', 'ltr', '1'),
+ ('2', 'libras', 'lbr', '1'),
+ ('3', 'gramos', 'ltr', '1');
 
 -- -----------------------------------------------------
 -- Table `administracion`.`tbl_transporte`
 -- -----------------------------------------------------
  CREATE TABLE IF NOT EXISTS `empresarial`.`tbl_transporte` (
-	`PK_codigo_transporte` INT NULL DEFAULT NULL,
+	`PK_codigo_transporte` INT  NOT NULL,
     `clase_transporte` VARCHAR(35) NULL DEFAULT NULL,/*ejemplo camioneta*/
     `marca_transporte` VARCHAR(35) NULL DEFAULT NULL,
     `modelo_transporte` VARCHAR(35) NULL DEFAULT NULL,/*año del vehiculo*/
@@ -598,14 +632,14 @@ ENGINE = InnoDB DEFAULT CHARACTER SET = utf8mb4;
 -- Table `administracion`.`transporte_ruta`
 -- -----------------------------------------------------
  CREATE TABLE IF NOT EXISTS `empresarial`.`tbl_transporteruta` (
-	`PK_codigo_transporteruta` INT NULL DEFAULT NULL,
+	`PK_codigo_transporteruta` INT  NOT NULL,
     `nombre_conductoruta` VARCHAR(35) NULL DEFAULT NULL,  /* nomina */
     `nombre_transporteruta` VARCHAR(35) NULL DEFAULT NULL, /*  */
     `tipo_transporteruta` VARCHAR(35) NULL DEFAULT NULL,
     `ubicacion_transporteruta` VARCHAR(35) NULL DEFAULT NULL, /*ubicacion donde se encuentra*/
     `direccion_transporteruta` VARCHAR(35) NULL DEFAULT NULL, /* direccion a donde va el vehiculo*/
-	`hora_salida_transporteruta` DATE NULL DEFAULT NULL,
-	`hora_entrada_transporteruta` DATE DEFAULT NULL,
+	`hora_salida_transporteruta` DATETIME NULL DEFAULT NULL,
+	`hora_entrada_transporteruta` DATETIME DEFAULT NULL,
     `estatus_transporteruta` TINYINT(2) NOT NULL,
 	PRIMARY KEY (`PK_codigo_transporteruta`))
 	ENGINE = InnoDB DEFAULT CHARACTER SET = utf8mb4;
@@ -615,13 +649,13 @@ ENGINE = InnoDB DEFAULT CHARACTER SET = utf8mb4;
 -- Table `administracion`.`inventario`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `empresarial`.`tbl_inventario` (
-  `PK_codigo_inventario` INT NULL DEFAULT NULL,
-  `PK_codigo_producto` INT NULL DEFAULT NULL,
-  `PK_codigo_bodega` INT NULL DEFAULT NULL,
-  `PK_codigo_existencia` INT NULL DEFAULT NULL,
-  `PK_codigo_linea` INT NULL DEFAULT NULL,
-  `PK_codigo_marca` INT NULL DEFAULT NULL,
-  `PK_codigo_unidad` INT NULL DEFAULT NULL,
+  `PK_codigo_inventario` INT  NOT NULL,
+  `PK_codigo_producto` INT  NOT NULL,
+  `PK_codigo_bodega` INT  NOT NULL,
+  `PK_codigo_existencia` INT  NOT NULL,
+  `PK_codigo_linea` INT  NOT NULL,
+  `PK_codigo_marca` INT  NOT NULL,
+  `PK_codigo_unidad` INT  NOT NULL,
   `estatus_inventario` TINYINT(2) NOT NULL,
   PRIMARY KEY(
   PK_codigo_inventario,
@@ -647,7 +681,7 @@ REFERENCES `empresarial`.`tbl_linea` (`PK_codigo_linea`)
 -- Table `administracion`.`producto`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `empresarial`.`tbl_producto` (
-  `PK_codigo_producto` INT NULL DEFAULT NULL, /*codigo barras - hace unico al producto*/
+  `PK_codigo_producto` INT  NOT NULL, /*codigo barras - hace unico al producto*/
   `nombre_producto` VARCHAR(35) NULL DEFAULT NULL, /*nombre_tipoproducto*/
   `descripcion_producto` VARCHAR(35) NULL DEFAULT NULL,
   `precio_producto` INT(10) DEFAULT NULL,
@@ -679,14 +713,18 @@ FOREIGN KEY (`codigo_unidad`)
 REFERENCES `empresarial`.`tbl_unidad` (`PK_codigo_unidad`)
   ) ENGINE = InnoDB DEFAULT CHARACTER SET = utf8mb4;
 
+INSERT INTO `empresarial`.`tbl_producto` 
+VALUES ('1', 'planchas', 'ingreso 17/08/2021', '120', '120', '1', '2', '4', '4', '2'),
+('2', 'jugos', 'ingreso 12/09/2021', '12', '12', '1', '1', '5', '4', '1');
+
 
 -- -----------------------------------------------------
 -- Table `administracion`.`existencia`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `empresarial`.`tbl_existencia` (
-`Pk_codigo_existencia` INT NULL DEFAULT NULL,
-`Pk_codigo_producto` INT NULL DEFAULT NULL,
-`Pk_codigo_bodega` INT NULL DEFAULT NULL,
+`Pk_codigo_existencia` INT  NOT NULL,
+`Pk_codigo_producto` INT  NOT NULL,
+`Pk_codigo_bodega` INT  NOT NULL,
 `cantidad_existencia` INT (35) NULL DEFAULT NULL,
 `fecha_entrada_existencia` DATE DEFAULT NULL,
 `fecha_salida_existencia` DATE DEFAULT NULL,
@@ -702,44 +740,86 @@ CREATE TABLE IF NOT EXISTS `empresarial`.`tbl_existencia` (
   REFERENCES `empresarial`.`tbl_bodega` (`PK_codigo_bodega`)
   ) ENGINE = InnoDB DEFAULT CHARACTER SET = utf8mb4;
 
+INSERT INTO `empresarial`.`tbl_existencia` 
+VALUES 
+('1', '1', '1', '10', '2021/10/5', '2021/10/2', '1'),
+ ('2', '2', '2', '20', '2021/8/15', '2021/9/30', '1'),
+('3', '3', '3', '30', '2021/7/5', '2021/8/10', '1');
+
+-- -----------------------------------------------------
+-- Table `administracion`.`movimiento`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `empresarial`.`tbl_movimiento` (
+`Pk_codigo_movimiento` INT  NOT NULL,
+
+`estatus_movimiento` TINYINT(2) NOT NULL,
+  PRIMARY KEY ( 
+  Pk_codigo_movimiento
+)
+  ) ENGINE = InnoDB DEFAULT CHARACTER SET = utf8mb4;
+
+-- -----------------------------------------------------
+-- Table `administracion`.`movimiento_detalle`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `empresarial`.`tbl_movimiento_detalle` (
+`Pk_codigo_movimiento_detalle` INT  NOT NULL,
+
+`estatus_movimiento_detalle` TINYINT(2) NOT NULL,
+  PRIMARY KEY ( 
+  Pk_codigo_movimiento_detalle
+)
+  ) ENGINE = InnoDB DEFAULT CHARACTER SET = utf8mb4;
+  
 -- -----------------------------------------------------
 -- Table `administracion`.`proveedor`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `empresarial`.`tbl_proveedor` (
- `PK_codigo_proveedor` INT NULL DEFAULT NULL,
+ `PK_codigo_proveedor` INT NOT NULL,
    `nombre_proveedor` VARCHAR(35) NULL DEFAULT NULL,
    `direccion_proveedor` VARCHAR(35) NULL DEFAULT NULL,
    `telefono_proveedor` VARCHAR(35) NULL DEFAULT NULL,
-   `nit_proveedor` INT(10) DEFAULT NULL,
+   `nit_proveedor` INT(10)  NOT NULL,
    `email_proveedor` VARCHAR(35) NULL DEFAULT NULL,
-   `saldo_proveedor` FLOAT DEFAULT NULL,
+   `representante_proveedor` VARCHAR(35) NULL DEFAULT NULL,
    `estatus_proveedor` TINYINT(2) NOT NULL,
   PRIMARY KEY (`PK_codigo_proveedor`))
 ENGINE = InnoDB DEFAULT CHARACTER SET = utf8mb4;
+INSERT INTO 
+`empresarial`.`tbl_proveedor` 
+VALUES 
+('1', 'serveceria gallo', 'zona 2 3-00', '51169327', '456789', 'gallo@gmial.com', 'Esteban Chilero', '1'),
+('2', 'cañareal', 'zona12 8-00', '2200800', '7890', 'cañareal@gmail.com', 'Dania Castillo', '1'),
+('3', 'walmart', 'zona6', '51169326', '26008785', 'walmartl@gmail.com', 'Marisol Caal', '1');
 
 -- -----------------------------------------------------
 -- Table `administracion`.`forma_pago`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `empresarial`.`tbl_forma_pago` (
- `PK_codigo_pago` INT NULL DEFAULT NULL,
+ `PK_codigo_pago` INT NOT NULL,
    `tipo_pago` VARCHAR(35) NULL DEFAULT NULL,
    `descripcion_pago` VARCHAR(35) NULL DEFAULT NULL,
    `fecha_pago` VARCHAR(35) NULL DEFAULT NULL,
    `estatus_pago` TINYINT(2) NOT NULL,
   PRIMARY KEY (`PK_codigo_pago`))
 ENGINE = InnoDB DEFAULT CHARACTER SET = utf8mb4;
+INSERT INTO 
+`empresarial`.`tbl_forma_pago` 
+VALUES ('1', 'cheque', 'vence el dia', '12/08/2021', '1'),
+('2', 'tarjeta', 'banco banrural', '16/08/2021','1'),
+('3', 'efectivo', 'exactos', '20/09/2021', '1');
+
 
 -- -----------------------------------------------------
 -- Table `administracion`.`compra_factura_encabezado`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `empresarial`.`tbl_compra_factura_encabezado` (
- `PK_codigo_factura` INT NULL DEFAULT NULL,
-  `PK_codigo_bodega` INT NULL DEFAULT NULL,
- `codigo_proveedor` INT NULL DEFAULT NULL,
+ `PK_codigo_factura` INT NOT NULL,
+  `PK_codigo_bodega` INT NOT NULL,
+ `codigo_proveedor` INT NOT NULL,
    `fecha_emision` VARCHAR(35) NULL DEFAULT NULL,
    `fecha_vencimiento` VARCHAR(35) NULL DEFAULT NULL,
-   `codigo_pago` INT NULL DEFAULT NULL,
-   `subtotal_encabezado` INT NULL DEFAULT NULL,
+   `codigo_pago` INT NOT NULL,
+   `subtotal_encabezado` INT NOT NULL,
    `estatus_factura` TINYINT(2) NOT NULL,
 
   PRIMARY KEY (
@@ -760,11 +840,11 @@ REFERENCES `empresarial`.`tbl_pago` (`PK_codigo_pago`)
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `empresarial`.`tbl_compra_factura_detalle` (
 `correlativo` INT AUTO_INCREMENT,
- `PK_codigo_factura` INT NULL DEFAULT NULL,
- `PK_codigo_producto` INT NULL DEFAULT NULL,
- `PK_codigo_bodega` INT NULL DEFAULT NULL,
- `cantidad_detalle` INT(20) NULL DEFAULT NULL,
-`costo_detalle` INT(20) NULL DEFAULT NULL,
+ `PK_codigo_factura` INT NOT NULL,
+ `PK_codigo_producto` INT NOT NULL,
+ `PK_codigo_bodega` INT NOT NULL,
+ `cantidad_detalle` INT NOT NULL,
+`costo_detalle` INT NOT NULL,
 	 	
   PRIMARY KEY (
   `correlativo`,
@@ -790,12 +870,12 @@ ENGINE = InnoDB DEFAULT CHARACTER SET = utf8mb4;
 -- Table `administracion`.`ordencompra_encabezado`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `empresarial`.`tbl_ordencompra_encabezado` (
- `PK_codigo_ordenCompra` INT NULL DEFAULT NULL,
- `codigo_proveedor` INT NULL DEFAULT NULL,
- `PK_codigo_bodega` INT NULL DEFAULT NULL,
+ `PK_codigo_ordenCompra` INT NOT NULL,
+ `codigo_proveedor` INT NOT NULL,
+ `PK_codigo_bodega` INT NOT NULL,
    `fecha_emision` VARCHAR(35) NULL DEFAULT NULL,
    `fecha_entrega` VARCHAR(35) NULL DEFAULT NULL,
-   `subtotal_encabezado` INT NULL DEFAULT NULL,
+   `subtotal_encabezado` INT NOT NULL,
    `estatus_ordecompra` TINYINT(2) NOT NULL,
 
   PRIMARY KEY (
@@ -813,11 +893,11 @@ REFERENCES `empresarial`.`tbl_proveedor` (`PK_codigo_proveedor`)
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `empresarial`.`tbl_ordencompra_detalle` (
 `correlativo` INT AUTO_INCREMENT,
-`PK_codigo_ordenCompra` INT NULL DEFAULT NULL,
- `PK_codigo_producto` INT NULL DEFAULT NULL,
- `PK_codigo_bodega` INT NULL DEFAULT NULL,
- `cantidad_detalle` INT NULL DEFAULT NULL,
- `costo_detalle` INT NULL DEFAULT NULL,
+`PK_codigo_ordenCompra` INT NOT NULL,
+ `PK_codigo_producto` INT NOT NULL,
+ `PK_codigo_bodega` INT NOT NULL,
+ `cantidad_detalle` INT NOT NULL,
+ `costo_detalle` INT NOT NULL,
 
 	 	
   PRIMARY KEY (
@@ -844,12 +924,12 @@ ENGINE = InnoDB DEFAULT CHARACTER SET = utf8mb4;
 -- Table `administracion`.`recepcioncompra_encabezado`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `empresarial`.`tbl_recepcioncompra_encabezado` (
- `PK_codigo_recepcionCompra` INT NULL DEFAULT NULL,
- `codigo_proveedor` INT NULL DEFAULT NULL,
- `PK_codigo_bodega` INT NULL DEFAULT NULL,
+ `PK_codigo_recepcionCompra` INT NOT NULL,
+ `codigo_proveedor` INT NOT NULL,
+ `PK_codigo_bodega` INT NOT NULL,
    `fecha_emision` VARCHAR(35) NULL DEFAULT NULL,
    `fecha_entrega` VARCHAR(35) NULL DEFAULT NULL,
-   `subtotal_encabezado` INT NULL DEFAULT NULL,
+   `subtotal_encabezado` INT NOT NULL,
    `estatus_ordecompra` TINYINT(2) NOT NULL,
 
   PRIMARY KEY (
@@ -867,11 +947,11 @@ REFERENCES `empresarial`.`tbl_proveedor` (`PK_codigo_proveedor`)
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `empresarial`.`tbl_recepcioncompra_detalle` (
 `correlativo` INT AUTO_INCREMENT,
-`PK_codigo_recepcionCompra` INT NULL DEFAULT NULL,
- `PK_codigo_producto` INT NULL DEFAULT NULL,
- `PK_codigo_bodega` INT NULL DEFAULT NULL,
- `cantidad_detalle` INT NULL DEFAULT NULL,
- `costo_detalle` INT NULL DEFAULT NULL,
+`PK_codigo_recepcionCompra` INT NOT NULL,
+ `PK_codigo_producto` INT NOT NULL,
+ `PK_codigo_bodega` INT NOT NULL,
+ `cantidad_detalle` INT NOT NULL,
+ `costo_detalle` INT NOT NULL,
 PRIMARY KEY (
  `correlativo` ,
  `PK_codigo_recepcionCompra`,
@@ -893,12 +973,12 @@ REFERENCES `empresarial`.`tbl_bodega` (`PK_codigo_bodega`)
 -- Table `administracion`.`devolucioncompra_encabezado`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `empresarial`.`tbl_devolucioncompra_encabezado` (
- `PK_codigo_devolucionCompra` INT NULL DEFAULT NULL,
- `codigo_proveedor` INT NULL DEFAULT NULL,
- `PK_codigo_bodega` INT NULL DEFAULT NULL,
+ `PK_codigo_devolucionCompra` INT NOT NULL,
+ `codigo_proveedor` INT NOT NULL,
+ `PK_codigo_bodega` INT NOT NULL,
    `fecha_emision` VARCHAR(35) NULL DEFAULT NULL,
    `fecha_entrega` VARCHAR(35) NULL DEFAULT NULL,
-   `subtotal_encabezado` INT NULL DEFAULT NULL,
+   `subtotal_encabezado` INT NOT NULL,
    `estatus_ordecompra` TINYINT(2) NOT NULL,
 PRIMARY KEY (
   `PK_codigo_devolucionCompra`,
@@ -915,11 +995,11 @@ REFERENCES `empresarial`.`tbl_proveedor` (`PK_codigo_proveedor`)
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `empresarial`.`tbl_devolucioncompra_detalle` (
 `correlativo` INT AUTO_INCREMENT,
-`PK_codigo_devolucionCompra` INT NULL DEFAULT NULL,
- `PK_codigo_producto` INT NULL DEFAULT NULL,
- `PK_codigo_bodega` INT NULL DEFAULT NULL,
- `cantidad_detalle` INT NULL DEFAULT NULL,
- `costo_detalle` INT NULL DEFAULT NULL,
+`PK_codigo_devolucionCompra` INT NOT NULL,
+ `PK_codigo_producto` INT NOT NULL,
+ `PK_codigo_bodega` INT NOT NULL,
+ `cantidad_detalle` INT NOT NULL,
+ `costo_detalle` INT NOT NULL,
 PRIMARY KEY (
  `correlativo` ,
  `PK_codigo_devolucionCompra`,
@@ -1232,58 +1312,4 @@ CREATE TABLE IF NOT EXISTS  `empresarial`.`tbl_balance_saldo_cliente` (
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8;
 
-INSERT INTO `empresarial`.`tbl_bodega` (`PK_codigo_bodega`, `nombre_bodega`, `estatus_bodega`)
- VALUES ('1', 'zona1', '1');
-INSERT INTO `empresarial`.`tbl_bodega` (`PK_codigo_bodega`, `nombre_bodega`, `estatus_bodega`) 
-VALUES ('2', 'zona3', '1');
-INSERT INTO `empresarial`.`tbl_bodega` (`PK_codigo_bodega`, `nombre_bodega`, `estatus_bodega`)
- VALUES ('3', 'zona10', '1');
-INSERT INTO `empresarial`.`tbl_bodega` (`PK_codigo_bodega`, `nombre_bodega`, `estatus_bodega`) 
-VALUES ('4', 'central', '1');
 
-INSERT INTO `empresarial`.`tbl_marca` (`PK_codigo_marca`, `nombre_marca`, `estatus_marca`) 
-VALUES ('1', 'cocacola', '1');
-INSERT INTO `empresarial`.`tbl_marca` (`PK_codigo_marca`, `nombre_marca`, `estatus_marca`) 
-VALUES ('2', 'señorial', '1');
-INSERT INTO `empresarial`.`tbl_marca` (`PK_codigo_marca`, `nombre_marca`, `estatus_marca`) 
-VALUES ('3', 'lala', '1');
-INSERT INTO `empresarial`.`tbl_marca` (`PK_codigo_marca`, `nombre_marca`, `estatus_marca`)
- VALUES ('4', 'sears', '1');
-INSERT INTO `empresarial`.`tbl_marca` (`PK_codigo_marca`, `nombre_marca`, `estatus_marca`) 
-VALUES ('5', 'kerns', '1');
-
-INSERT INTO `empresarial`.`tbl_linea` (`PK_codigo_linea`, `nombre_linea`, `estatus_linea`) 
-VALUES ('1', 'blanca', '1');
-INSERT INTO `empresarial`.`tbl_linea` (`PK_codigo_linea`, `nombre_linea`, `estatus_linea`) 
-VALUES ('2', 'electronica', '1');
-INSERT INTO `empresarial`.`tbl_linea` (`PK_codigo_linea`, `nombre_linea`, `estatus_linea`) 
-VALUES ('3', 'deportiva', '1');
-INSERT INTO `empresarial`.`tbl_linea` (`PK_codigo_linea`, `nombre_linea`, `estatus_linea`) 
-VALUES ('4', 'cosmeticos', '1');
-
-INSERT INTO `empresarial`.`tbl_forma_pago` (`PK_codigo_pago`, `tipo_pago`, `descripcion_pago`, `fecha_pago`, `estatus_pago`) 
-VALUES ('1', 'cheque', 'vence el dia', '12/08/2021', '1');
-INSERT INTO `empresarial`.`tbl_forma_pago` (`PK_codigo_pago`, `tipo_pago`, `descripcion_pago`, `fecha_pago`, `estatus_pago`) 
-VALUES ('2', 'tarjeta', 'banco banrural', '16/08/2021', '1');
-INSERT INTO `empresarial`.`tbl_forma_pago` (`PK_codigo_pago`, `tipo_pago`, `descripcion_pago`, `fecha_pago`, `estatus_pago`) 
-VALUES ('3', 'efectivo', 'exactos', '20/09/2021', '1');
-
-
-INSERT INTO `empresarial`.`tbl_producto` (`PK_codigo_producto`, `nombre_producto`, `descripcion_producto`, `precio_producto`, `costo_producto`, `estatus_producto`, `codigo_linea`, `codigo_marca`, `codigo_bodega`, `codigo_unidad`) 
-VALUES ('1', 'planchas', 'ingreso 17/08/2021', '120', '120', '1', '2', '4', '4', '2');
-INSERT INTO `empresarial`.`tbl_producto` (`PK_codigo_producto`, `nombre_producto`, `descripcion_producto`, `precio_producto`, `costo_producto`, `estatus_producto`, `codigo_linea`, `codigo_marca`, `codigo_bodega`, `codigo_unidad`) 
-VALUES ('2', 'jugos', 'ingreso 12/09/2021', '12', '12', '1', '1', '5', '4', '1');
-
-
-INSERT INTO `empresarial`.`tbl_unidad` (`PK_codigo_unidad`, `nombre_unidad`, `medida_acronimo`) 
-VALUES ('1', '1', '5');
-INSERT INTO `empresarial`.`tbl_unidad` (`PK_codigo_unidad`, `nombre_unidad`, `medida_acronimo`) 
-VALUES ('2', '2', '6');
-INSERT INTO `empresarial`.`tbl_unidad` (`PK_codigo_unidad`, `nombre_unidad`, `medida_acronimo`) 
-VALUES ('3', '5', '10');
-
-
-INSERT INTO `empresarial`.`tbl_proveedor` (`PK_codigo_proveedor`, `nombre_proveedor`, `direccion_proveedor`, `telefono_proveedor`, `nit_proveedor`, `email_proveedor`, `saldo_proveedor`, `estatus_proveedor`) 
-VALUES ('1', 'serveceria gallo', 'zona 2 3-00', '51169327', '456789', 'gallo@gmial.com', '0', '1');
-INSERT INTO `empresarial`.`tbl_proveedor` (`PK_codigo_proveedor`, `nombre_proveedor`, `direccion_proveedor`, `telefono_proveedor`, `nit_proveedor`, `email_proveedor`, `saldo_proveedor`, `estatus_proveedor`) 
-VALUES ('2', 'cañareal', 'zona12 8-00', '2200800', '7890', 'cañareal@gmail.com', '0', '1');
