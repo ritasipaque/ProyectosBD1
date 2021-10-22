@@ -1019,12 +1019,13 @@ REFERENCES `empresarial`.`tbl_bodega` (`PK_codigo_bodega`)
   
 ENGINE = InnoDB DEFAULT CHARACTER SET = utf8mb4;
 
+
 -- -----------------------------------------------------
 -- Table `administracion`.`cliente`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `empresarial`.`tbl_cliente` (
- `PK_codigo_cliente` INT NULL DEFAULT NULL,
-   `nombre_cliente` VARCHAR(35) NULL DEFAULT NULL,
+ `PK_codigo_cliente`  INT  NOT NULL ,
+   `nombre_cliente` VARCHAR(35) NULL ,
   `direccion_cliente` VARCHAR(35) NULL DEFAULT NULL,
     `telefono_cliente` VARCHAR(35) NULL DEFAULT NULL,
   `nit_cliente` INT(10) DEFAULT NULL,
@@ -1033,37 +1034,55 @@ CREATE TABLE IF NOT EXISTS `empresarial`.`tbl_cliente` (
   `cuenta_cliente` INT DEFAULT NULL,
   `estatus_cliente` TINYINT(2) NOT NULL,
   PRIMARY KEY (`PK_codigo_cliente`))
-ENGINE = InnoDB
-DEFAULT CHARACTER SET = utf8;
+
+ ENGINE = InnoDB DEFAULT CHARACTER SET = utf8mb4;
+ INSERT INTO `empresarial`.`tbl_cliente`
+ VALUES 
+('1', 'JUAN', 'ZONA 6', '1232445', '4453453', 'A', '0', '12424', '1'),
+('2', 'CARLOS', 'ZONA 5', '532434', '3435334', 'A', '0', '34243', '1'),
+('3', 'VERA', 'ZONA 4', '645544', '4343435', 'A', '0', '3434', '1'),
+('4', 'DIEGO', 'ZONA 8', '434355', '7676655', 'A', '0', '3423', '1'),
+('5', 'IVAN', 'ZONA 9', '665544', '6565454', 'A', '0', '3343', '1');
 
 -- -----------------------------------------------------
 -- Table `administracion`.`cobrador`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS  `empresarial`.`tbl_cobrador` (
- `PK_codigo_cobrador` INT NULL DEFAULT NULL,
+ `PK_codigo_cobrador`  INT   NOT NULL ,
    `nombre_cobrador` VARCHAR(35) NULL DEFAULT NULL,
   `estatus_cobrador` TINYINT(2) NOT NULL,
   PRIMARY KEY (`PK_codigo_cobrador`))
-ENGINE = InnoDB
-DEFAULT CHARACTER SET = utf8;
+ ENGINE = InnoDB DEFAULT CHARACTER SET = utf8mb4;
+ INSERT INTO `empresarial`.`tbl_cobrador`
+ VALUES 
+('1', 'JUAN',  '1'),
+('2', 'CARLOS','1'),
+('3', 'VERA', '1'),
+('4', 'DIEGO',  '1'),
+('5', 'IVAN', '1');
 
 -- -----------------------------------------------------
 -- Table `administracion`.`vendedores`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS  `empresarial`.`tbl_vendedor` (
- `PK_codigo_vendedor` INT NULL DEFAULT NULL,
+ `PK_codigo_vendedor` INT   NOT NULL ,
    `nombre_vendedor` VARCHAR(35) NULL DEFAULT NULL,
   `estatus_vendedor` TINYINT(2) NOT NULL,
   PRIMARY KEY (`PK_codigo_vendedor`))
-ENGINE = InnoDB
-DEFAULT CHARACTER SET = utf8;
-
+ ENGINE = InnoDB DEFAULT CHARACTER SET = utf8mb4;
+ INSERT INTO `empresarial`.`tbl_vendedor`
+ VALUES 
+('1', 'JUAN', '1'),
+('2', 'CARLOS','1'),
+('3', 'VERA','1'),
+('4', 'DIEGO','1'),
+('5', 'IVAN','1');
 -- -----------------------------------------------------
 -- Table `administracion`.`control_precio_encabezado`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS  `empresarial`.`tbl_control_precio_encabezado` (
- `PK_codigo_producto_precio_encabezado` INT NULL DEFAULT NULL,
-   `codigo_producto`INT NULL DEFAULT NULL,
+ `PK_codigo_producto_precio_encabezado` INT NOT NULL ,
+   `codigo_producto`INT   NOT NULL,
    `fecha_emision` VARCHAR(35) NULL DEFAULT NULL,
 	`fecha_vencer` VARCHAR(35) NULL DEFAULT NULL,
      
@@ -1074,28 +1093,27 @@ CREATE TABLE IF NOT EXISTS  `empresarial`.`tbl_control_precio_encabezado` (
 FOREIGN KEY (`codigo_producto`)
 REFERENCES  `empresarial`.`tbl_producto` (`PK_codigo_producto`)
   )ENGINE = InnoDB
-DEFAULT CHARACTER SET = utf8;
+ ENGINE = InnoDB DEFAULT CHARACTER SET = utf8mb4;
 
 -- -----------------------------------------------------
 -- Table `administracion`.`tbl_control_precio_detalle`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS  `empresarial`.`tbl_control_precio_detalle` (
- `PK_codigo_producto_precio_detalle` INT NULL DEFAULT NULL,
+ `PK_codigo_producto_precio_detalle` INT NOT NULL ,
   `nombre_producto` VARCHAR(35) NULL DEFAULT NULL,
 	`precio_producto` VARCHAR(35) NULL DEFAULT NULL,
    `costo_producto` VARCHAR(35) NULL DEFAULT NULL,
 PRIMARY KEY (
  `PK_codigo_producto_precio_detalle`
 ))
-ENGINE = InnoDB
-DEFAULT CHARACTER SET = utf8;
+ ENGINE = InnoDB DEFAULT CHARACTER SET = utf8mb4;
 
 -- -----------------------------------------------------
 -- Table `administracion`.`cotizacion_encabezado`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS  `empresarial`.`tbl_cotizacion_encabezado` (
-`no_serie` INT AUTO_INCREMENT ,
-`PK_codigo_cotizacion_encabezado`INT NULL DEFAULT NULL,
+`no_serie` INT AUTO_INCREMENT  NOT NULL ,
+`PK_codigo_cotizacion_encabezado`INT   NOT NULL ,
 `codigo_cliente`INT NULL DEFAULT NULL,
 `codigo_cobrador`INT NULL DEFAULT NULL,
 `codigo_vendedor`INT NULL DEFAULT NULL,
@@ -1115,15 +1133,14 @@ REFERENCES  `empresarial`.`tbl_vendedor` (`PK_codigo_vendedor`),
  FOREIGN KEY ( `codigo_cobrador`)
 REFERENCES  `empresarial`.`tbl_cobrador` ( `PK_codigo_cobrador`)
   )
-ENGINE = InnoDB
-DEFAULT CHARACTER SET = utf8;
+ ENGINE = InnoDB DEFAULT CHARACTER SET = utf8mb4;
 
 -- -----------------------------------------------------
 -- Table `administracion`.`cotizacion_detalle`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS  `empresarial`.`tbl_cotizacion_detalle` (
-`no_serie` INT AUTO_INCREMENT ,
-`codigo_cotizacion_encabezado`INT NULL DEFAULT NULL,
+`no_serie`INT NOT NULL ,
+`codigo_cotizacion_encabezado`INT   NOT NULL ,
 `cantidad_servicio` FLOAT(15) NULL DEFAULT NULL,
 `precio_servicio` FLOAT(15) NULL DEFAULT NULL,
   PRIMARY KEY (
@@ -1132,15 +1149,14 @@ CREATE TABLE IF NOT EXISTS  `empresarial`.`tbl_cotizacion_detalle` (
  FOREIGN KEY (`no_serie`)
 REFERENCES  `empresarial`.`tbl_factura_encabezado` (`no_serie`)
   )
-  ENGINE = InnoDB
-DEFAULT CHARACTER SET = utf8;
+  ENGINE = InnoDB DEFAULT CHARACTER SET = utf8mb4;
 
 -- -----------------------------------------------------
 -- Table `administracion`.`pedido_encabezado`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS  `empresarial`.`tbl_pedido_encabezado` (
-`no_serie` INT AUTO_INCREMENT ,
-`PK_codigo_pedido_encabezado`INT NULL DEFAULT NULL,
+`no_serie` INT AUTO_INCREMENT  NOT NULL ,
+`PK_codigo_pedido_encabezado`INT    NOT NULL ,
 `codigo_cliente`INT NULL DEFAULT NULL,
 `codigo_cobrador`INT NULL DEFAULT NULL,
 `codigo_vendedor`INT NULL DEFAULT NULL,
@@ -1160,15 +1176,14 @@ REFERENCES  `empresarial`.`tbl_vendedor` (`PK_codigo_vendedor`),
  FOREIGN KEY ( `codigo_cobrador`)
 REFERENCES  `empresarial`.`tbl_cobrador` ( `PK_codigo_cobrador`)
   )
-ENGINE = InnoDB
-DEFAULT CHARACTER SET = utf8;
+ ENGINE = InnoDB DEFAULT CHARACTER SET = utf8mb4;
 
 -- -----------------------------------------------------
 -- Table `administracion`.`pedido_detalle`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS  `empresarial`.`tbl_pedido_detalle` (
-`no_serie` INT AUTO_INCREMENT ,
-`codigo_pedido_encabezado`INT NULL DEFAULT NULL,
+`no_serie` INT AUTO_INCREMENT  NOT NULL ,
+`codigo_pedido_encabezado`INT   NOT NULL ,
 `cantidad_servicio` FLOAT(15) NULL DEFAULT NULL,
 `precio_servicio` FLOAT(15) NULL DEFAULT NULL,
   PRIMARY KEY (
@@ -1177,15 +1192,14 @@ CREATE TABLE IF NOT EXISTS  `empresarial`.`tbl_pedido_detalle` (
  FOREIGN KEY (`no_serie`)
 REFERENCES  `empresarial`.`tbl_factura_encabezado` (`no_serie`)
   )
-  ENGINE = InnoDB
-DEFAULT CHARACTER SET = utf8;
+  ENGINE = InnoDB DEFAULT CHARACTER SET = utf8mb4;
 
 -- -----------------------------------------------------
 -- Table `administracion`.`factura_encabezado`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS  `empresarial`.`tbl_factura_encabezado` (
-`no_serie` INT AUTO_INCREMENT ,
-`PK_codigo_factura_encabezado`INT NULL DEFAULT NULL,
+`no_serie` INT AUTO_INCREMENT  NOT  NULL ,
+`PK_codigo_factura_encabezado`INT   NOT NULL ,
 `codigo_cliente`INT NULL DEFAULT NULL,
 `codigo_cobrador`INT NULL DEFAULT NULL,
 `codigo_vendedor`INT NULL DEFAULT NULL,
@@ -1205,15 +1219,14 @@ REFERENCES  `empresarial`.`tbl_vendedor` (`PK_codigo_vendedor`),
  FOREIGN KEY ( `codigo_cobrador`)
 REFERENCES  `empresarial`.`tbl_cobrador` ( `PK_codigo_cobrador`)
   )
-ENGINE = InnoDB
-DEFAULT CHARACTER SET = utf8;
+ ENGINE = InnoDB DEFAULT CHARACTER SET = utf8mb4;
 
 -- -----------------------------------------------------
 -- Table `administracion`.`factura_detalle`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS  `empresarial`.`tbl_factura_detalle` (
-`no_serie` INT AUTO_INCREMENT ,
-`codigo_factura_encabezado`INT NULL DEFAULT NULL,
+`no_serie` INT AUTO_INCREMENT  NOT NULL ,
+`codigo_factura_encabezado`INT   NOT NULL ,
 `cantidad_servicio` FLOAT(15) NULL DEFAULT NULL,
 `precio_servicio` FLOAT(15) NULL DEFAULT NULL,
   PRIMARY KEY (
@@ -1222,15 +1235,13 @@ CREATE TABLE IF NOT EXISTS  `empresarial`.`tbl_factura_detalle` (
  FOREIGN KEY (`no_serie`)
 REFERENCES  `empresarial`.`tbl_factura_encabezado` (`no_serie`)
   )
-  ENGINE = InnoDB
-DEFAULT CHARACTER SET = utf8;
-
+ ENGINE = InnoDB DEFAULT CHARACTER SET = utf8mb4;
 -- -----------------------------------------------------
 -- Table `administracion`.`devolucion_venta_encabezado`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS  `empresarial`.`tbl_devolucion_venta_encabezado` (
-`no_serie` INT AUTO_INCREMENT ,
-`PK_codigo_devolucion_venta_encabezado`INT NULL DEFAULT NULL,
+`no_serie` INT AUTO_INCREMENT  NOT NULL ,
+`PK_codigo_devolucion_venta_encabezado`INT   NOT NULL ,
 `codigo_cliente`INT NULL DEFAULT NULL,
 `codigo_cobrador`INT NULL DEFAULT NULL,
 `codigo_vendedor`INT NULL DEFAULT NULL,
@@ -1250,15 +1261,14 @@ REFERENCES  `empresarial`.`tbl_vendedor` (`PK_codigo_vendedor`),
  FOREIGN KEY ( `codigo_cobrador`)
 REFERENCES  `empresarial`.`tbl_cobrador` ( `PK_codigo_cobrador`)
   )
-ENGINE = InnoDB
-DEFAULT CHARACTER SET = utf8;
 
+ ENGINE = InnoDB DEFAULT CHARACTER SET = utf8mb4;
 -- -----------------------------------------------------
 -- Table `administracion`.`devolucion_venta_detalle`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS  `empresarial`.`tbl_devolucion_venta_detalle` (
-`no_serie` INT AUTO_INCREMENT ,
-`codigo_devolucion_venta_encabezado`INT NULL DEFAULT NULL,
+`no_serie` INT AUTO_INCREMENT  NOT NULL ,
+`codigo_devolucion_venta_encabezado`INT   NOT NULL ,
 `cantidad_servicio` FLOAT(15) NULL DEFAULT NULL,
 `precio_servicio` FLOAT(15) NULL DEFAULT NULL,
   PRIMARY KEY (
@@ -1267,15 +1277,13 @@ CREATE TABLE IF NOT EXISTS  `empresarial`.`tbl_devolucion_venta_detalle` (
  FOREIGN KEY (`no_serie`)
 REFERENCES  `empresarial`.`tbl_factura_encabezado` (`no_serie`)
   )
-  ENGINE = InnoDB
-DEFAULT CHARACTER SET = utf8;
-
+ ENGINE = InnoDB DEFAULT CHARACTER SET = utf8mb4;
 -- -----------------------------------------------------
 -- Table `administracion`.`control pago`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS  `empresarial`.`tbl_control_pago` (
-`no_serie` INT AUTO_INCREMENT ,
-`PK_codigo_comprobacion`INT NULL DEFAULT NULL,
+`no_serie` INT  NOT NULL ,
+`PK_codigo_comprobacion`INT   NOT NULL ,
 `codigo_devolucion_venta`INT NULL DEFAULT NULL,
 `codigo_factura_encabezado`INT NULL DEFAULT NULL,
 `codigo_cliente`INT NULL DEFAULT NULL,
@@ -1292,14 +1300,13 @@ CREATE TABLE IF NOT EXISTS  `empresarial`.`tbl_control_pago` (
 REFERENCES  `empresarial`.`tbl_cliente` (`PK_codigo_cliente`)
 
   )
-ENGINE = InnoDB
-DEFAULT CHARACTER SET = utf8;
+ ENGINE = InnoDB DEFAULT CHARACTER SET = utf8mb4;
 
 -- -----------------------------------------------------
 -- Table `administracion`.`balance_saldo_cliente`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS  `empresarial`.`tbl_balance_saldo_cliente` (
-`PK_codigo_salgo_cliente`INT NULL DEFAULT NULL,
+`PK_codigo_salgo_cliente` INT  NOT NULL ,
 `PK_codigo_comprobacion`INT NULL DEFAULT NULL,
 `PK_codigo_cliente`INT NULL DEFAULT NULL,
 `fecha_vencimiento` VARCHAR(35) NULL DEFAULT NULL,
@@ -1309,7 +1316,4 @@ CREATE TABLE IF NOT EXISTS  `empresarial`.`tbl_balance_saldo_cliente` (
    `PK_codigo_salgo_cliente`
   )
   )
-ENGINE = InnoDB
-DEFAULT CHARACTER SET = utf8;
-
-
+ ENGINE = InnoDB DEFAULT CHARACTER SET = utf8mb4;
