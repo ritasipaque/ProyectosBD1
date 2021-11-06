@@ -542,55 +542,68 @@ FOREIGN KEY (`PK_id_horario`) REFERENCES `tbl_horario`(`PK_id_horario`)
 -- Table `empresarial`.`linea`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `empresarial`.`tbl_linea` (
- `PK_codigo_linea` INT  NOT NULL,
-   `nombre_linea` VARCHAR(35) NULL DEFAULT NULL,
-  `estatus_linea` TINYINT(2) NOT NULL,
-  PRIMARY KEY (`PK_codigo_linea`))
-
+`PK_codigo_linea` INT  NOT NULL,
+`nombre_linea` VARCHAR(35) NULL DEFAULT NULL,
+`estatus_linea` TINYINT NOT NULL,
+PRIMARY KEY (`PK_codigo_linea`))
 ENGINE = InnoDB DEFAULT CHARACTER SET = utf8mb4;
-
 INSERT INTO `empresarial`.`tbl_linea` 
 VALUES 
 ('1', 'blanca', '1'),
- ('2', 'electronica', '1'),
- ('3', 'deportiva', '1'),
- ('4', 'cosmeticos', '1');
+('2', 'electronica', '1'),
+('3', 'deportiva', '1'),
+('4', 'cosmeticos', '1'),
+('5', 'libreria', '1'),
+('6', 'medicamento', '1'),
+('7', 'samsung', '1'),
+('8', 'bebidas', '1'),
+('9', 'ropa ', '1'),
+('10', 'Coffe', '1');
 
 -- -----------------------------------------------------
 -- Table `administracion`.`marca`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `empresarial`.`tbl_marca` (
- `PK_codigo_marca` INT  NOT NULL,
-   `nombre_marca` VARCHAR(35) NULL DEFAULT NULL,
-  `estatus_marca` TINYINT(2) NOT NULL,
-  PRIMARY KEY (`PK_codigo_marca`))
+`PK_codigo_marca` INT  NOT NULL,
+`nombre_marca` VARCHAR(35) NULL DEFAULT NULL,
+`estatus_marca` TINYINT NOT NULL,
+PRIMARY KEY (`PK_codigo_marca`))
 ENGINE = InnoDB DEFAULT CHARACTER SET = utf8mb4;
-
 INSERT INTO `empresarial`.`tbl_marca` 
 VALUES 
- ('1', 'cocacola', '1'),
- ('2', 'señorial', '1'),
+('1', 'cocacola', '1'),
+('2', 'señorial', '1'),
 ('3', 'lala', '1'),
- ('4', 'sears', '1'),
-('5', 'kerns', '1');
+('4', 'sears', '1'),
+('5', 'kerns', '1'),
+('6', 'bic', '1'),
+('7', 'la granja', '1'),
+('8', 'bimbo', '1'),
+('9', 'claro ', '1'),
+('10', 'splash', '1');
 
 -- -----------------------------------------------------
 -- Table `administracion`.`bodega`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `empresarial`.`tbl_bodega` (
- `PK_codigo_bodega` INT  NOT NULL,
-   `nombre_bodega` VARCHAR(35) NULL DEFAULT NULL,
-  `estatus_bodega` TINYINT(2) NOT NULL,
-  PRIMARY KEY (`PK_codigo_bodega`))
+`PK_codigo_bodega` INT  NOT NULL,
+`nombre_bodega` VARCHAR(35) NULL DEFAULT NULL,
+`estatus_bodega` TINYINT NOT NULL,
+PRIMARY KEY (`PK_codigo_bodega`))
 ENGINE = InnoDB DEFAULT CHARACTER SET = utf8mb4;
-
 INSERT INTO
- `empresarial`.`tbl_bodega` 
- VALUES
- ('1', 'zona1', '1'),
- ('2', 'zona3', '1'),
- ('3', 'zona10', '1'),
- ('4', 'central', '1');
+`empresarial`.`tbl_bodega` 
+VALUES
+('1', 'zona11', '1'),
+('2', 'zona3', '1'),
+('3', 'zona10', '1'),
+('4', 'central', '1'),
+('5', 'zona 15', '1'),
+('6', 'zona 2', '1'),
+('7', 'zona 5', '1'),
+('8', 'zona 6', '1'),
+('9', 'carretera el salvador', '1'),
+('10', 'calzada la paz', '1');
 
 
 -- -----------------------------------------------------
@@ -598,177 +611,176 @@ INSERT INTO
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `empresarial`.`tbl_unidad` (
  `PK_codigo_unidad` INT  NOT NULL,
- `nombre_unidad` VARCHAR(35) NULL DEFAULT NULL, 
- `medida_acronimo` VARCHAR(35) NULL DEFAULT NULL, 
- `estatus_unidad` TINYINT(2) NOT NULL,
-  PRIMARY KEY (`PK_codigo_unidad`))
+`nombre_unidad` VARCHAR(35) NULL DEFAULT NULL, 
+`medida_acronimo` VARCHAR(35) NULL DEFAULT NULL, 
+`estatus_unidad` TINYINT NOT NULL,
+PRIMARY KEY (`PK_codigo_unidad`))
 ENGINE = InnoDB DEFAULT CHARACTER SET = utf8mb4;
-
 INSERT INTO `empresarial`.`tbl_unidad` 
 VALUES 
 ('1', 'litros', 'ltr', '1'),
- ('2', 'libras', 'lbr', '1'),
- ('3', 'gramos', 'ltr', '1');
+('2', 'libras', 'lbr', '1'),
+('3', 'gramos', 'gr', '1'),
+('4', 'arroba', '@', '1'),
+('5', 'unidades', 'u', '1'),
+('6', 'kilogramo', 'kg', '1'),
+('7', 'onza', 'onz', '1'),
+('8', 'miligramos', 'mili', '1');
 
 -- -----------------------------------------------------
 -- Table `administracion`.`tbl_transporte`
 -- -----------------------------------------------------
- CREATE TABLE IF NOT EXISTS `empresarial`.`tbl_transporte` (
-	`PK_codigo_transporte` INT  NOT NULL,
-    `clase_transporte` VARCHAR(35) NULL DEFAULT NULL,/*ejemplo camioneta*/
-    `marca_transporte` VARCHAR(35) NULL DEFAULT NULL,
-    `modelo_transporte` VARCHAR(35) NULL DEFAULT NULL,/*año del vehiculo*/
-    `tipo_transporte` VARCHAR(35) NULL DEFAULT NULL,
-    `placa_transporte` VARCHAR(10) NULL DEFAULT NULL,
-    `color_transporte` VARCHAR(35) NULL DEFAULT NULL,
-    `estado_transporte` VARCHAR(35) NULL DEFAULT NULL, /*buen estado, dañado*/
-    `numero_motor_transporte` VARCHAR(35) NULL DEFAULT NULL, 
-    `estatus_transporte` TINYINT(2) NOT NULL,
-	PRIMARY KEY (`PK_codigo_transporte`))
-	ENGINE = InnoDB DEFAULT CHARACTER SET = utf8mb4;
+
+CREATE TABLE IF NOT EXISTS `empresarial`.`tbl_transporte` (
+`PK_codigo_transporte` INT  NOT NULL,
+`clase_transporte` VARCHAR(35) NULL DEFAULT NULL,
+`marca_transporte` VARCHAR(35) NULL DEFAULT NULL,
+`modelo_transporte` VARCHAR(35) NULL DEFAULT NULL,
+`tipo_transporte` VARCHAR(35) NULL DEFAULT NULL,
+`placa_transporte` VARCHAR(10) NULL DEFAULT NULL,
+`color_transporte` VARCHAR(35) NULL DEFAULT NULL,
+`estado_transporte` VARCHAR(35) NULL DEFAULT NULL,
+`numero_motor_transporte` VARCHAR(35) NULL DEFAULT NULL, 
+`estatus_transporte` TINYINT NOT NULL,
+PRIMARY KEY (`PK_codigo_transporte`))
+ENGINE = InnoDB DEFAULT CHARACTER SET = utf8mb4;
+INSERT INTO 
+`empresarial`.`tbl_transporte`
+(`PK_codigo_transporte`, `clase_transporte`, `marca_transporte`,
+ `modelo_transporte`, `tipo_transporte`, `placa_transporte`, `color_transporte`, 
+ `estado_transporte`, `numero_motor_transporte`, `estatus_transporte`) 
+ VALUES 
+('1', 'Liviano 4 puertas', 'Volvo', '2019', 'Liviano', '584PHP', 'Azul', 'Buen estado', '854555568', '1'),
+('2', 'PickUp 4X4', 'Honda', '2017', 'PickUp', '854SJK', 'Negro', 'Buen Estado', '745558944452', '1'),
+('3', 'Camioneta', 'Mitsubishi Lanser', '2020', 'Liviano', '852ETY', 'Plateado', 'Buen Estado', '45877744', '1');
+   
 
 
 -- -----------------------------------------------------
 -- Table `administracion`.`transporte_ruta`
 -- -----------------------------------------------------
- CREATE TABLE IF NOT EXISTS `empresarial`.`tbl_transporteruta` (
-	`PK_codigo_transporteruta` INT  NOT NULL,
-    `nombre_conductoruta` VARCHAR(35) NULL DEFAULT NULL,  /* nomina */
-    `nombre_transporteruta` VARCHAR(35) NULL DEFAULT NULL, /*  */
-    `tipo_transporteruta` VARCHAR(35) NULL DEFAULT NULL,
-    `ubicacion_transporteruta` VARCHAR(35) NULL DEFAULT NULL, /*ubicacion donde se encuentra*/
-    `direccion_transporteruta` VARCHAR(35) NULL DEFAULT NULL, /* direccion a donde va el vehiculo*/
-	`hora_salida_transporteruta` DATETIME NULL DEFAULT NULL,
-	`hora_entrada_transporteruta` DATETIME DEFAULT NULL,
-    `estatus_transporteruta` TINYINT(2) NOT NULL,
-	PRIMARY KEY (`PK_codigo_transporteruta`))
-	ENGINE = InnoDB DEFAULT CHARACTER SET = utf8mb4;
+  CREATE TABLE IF NOT EXISTS `empresarial`.`tbl_transporteruta` (
+`PK_codigo_transporteruta` INT  NOT NULL,
+`nombre_conductoruta` VARCHAR(35) NULL DEFAULT NULL,  
+`nombre_transporteruta` VARCHAR(35) NULL DEFAULT NULL, 
+`tipo_transporteruta` VARCHAR(35) NULL DEFAULT NULL,
+`ubicacion_transporteruta` VARCHAR(35) NULL DEFAULT NULL, 
+`direccion_transporteruta` VARCHAR(35) NULL DEFAULT NULL, 
+`hora_salida_transporteruta` TIME NULL DEFAULT NULL,     /*HH:MM:SS*/
+`hora_entrada_transporteruta` TIME NULL DEFAULT NULL,
+`estatus_transporteruta` TINYINT NOT NULL,
+PRIMARY KEY (`PK_codigo_transporteruta`))
+ENGINE = InnoDB DEFAULT CHARACTER SET = utf8mb4;
+INSERT INTO
+`empresarial`.`tbl_transporteruta`
+VALUES
+('1', 'Luis', 'Volvo', 'Liviano', 'Zona 10', 'Zona 1', '03:00:00', '02:10:00', '1'),
+('2', 'Marcos', 'Toyota', 'Liviano', 'Zona 5', 'Zona 15', '11:00:00', '10:00:00', '1'),
+('3', 'Maria', 'Hyunday', 'Liviano', 'Zona 10', 'Antigua Guatemala', '12:30:00', '10:20:00', '1');
     
     
-    -- -----------------------------------------------------
--- Table `administracion`.`inventario`
--- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `empresarial`.`tbl_inventario` (
-  `PK_codigo_inventario` INT  NOT NULL,
-  `PK_codigo_producto` INT  NOT NULL,
-  `PK_codigo_bodega` INT  NOT NULL,
-  `PK_codigo_existencia` INT  NOT NULL,
-  `PK_codigo_linea` INT  NOT NULL,
-  `PK_codigo_marca` INT  NOT NULL,
-  `PK_codigo_unidad` INT  NOT NULL,
-  `estatus_inventario` TINYINT(2) NOT NULL,
-  PRIMARY KEY(
-  PK_codigo_inventario,
-  PK_codigo_producto,
-  PK_codigo_bodega,
-  PK_codigo_existencia,
-  PK_codigo_linea,
-  PK_codigo_marca,
-  PK_codigo_unidad
-  ),
-FOREIGN KEY (`PK_codigo_producto`)
-REFERENCES `empresarial`.`tbl_producto` (`PK_codigo_producto`),
-FOREIGN KEY (`PK_codigo_bodega`)
-REFERENCES `empresarial`.`tbl_bodega` (`PK_codigo_bodega`),
-FOREIGN KEY (`PK_codigo_existencia`)
-REFERENCES `empresarial`.`tbl_existencia` (`PK_codigo_existencia`),
-FOREIGN KEY (`PK_codigo_linea`)
-REFERENCES `empresarial`.`tbl_linea` (`PK_codigo_linea`)
-
-  ) ENGINE = InnoDB DEFAULT CHARACTER SET = utf8mb4;
 
 -- -----------------------------------------------------
 -- Table `administracion`.`producto`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `empresarial`.`tbl_producto` (
-  `PK_codigo_producto` INT  NOT NULL, /*codigo barras - hace unico al producto*/
-  `nombre_producto` VARCHAR(35) NULL DEFAULT NULL, /*nombre_tipoproducto*/
-  `descripcion_producto` VARCHAR(35) NULL DEFAULT NULL,
-  `precio_producto` INT(10) DEFAULT NULL,
-  `costo_producto` INT (10) DEFAULT NULL,
-  `estatus_producto` TINYINT(2) NOT NULL,
-  `codigo_linea` INT NULL DEFAULT NULL,
-  `codigo_marca` INT NULL DEFAULT NULL,
-  `codigo_bodega` INT NULL DEFAULT NULL,
-  `codigo_unidad` INT NULL DEFAULT NULL,
-  
-  PRIMARY KEY (
-  `PK_codigo_producto`
-  
-),
 
+`PK_codigo_producto` INT  NOT NULL, 
+`nombre_producto` VARCHAR(35) NULL DEFAULT NULL,
+`descripcion_producto` VARCHAR(35) NULL DEFAULT NULL,
+`precio_producto` INT DEFAULT NULL,
+`costo_producto` INT DEFAULT NULL,
+`estatus_producto` TINYINT NOT NULL,
+`codigo_linea` INT NULL DEFAULT NULL,
+`codigo_marca` INT NULL DEFAULT NULL,
+`codigo_bodega` INT NULL DEFAULT NULL,
+`codigo_unidad` INT NULL DEFAULT NULL,
+PRIMARY KEY (
+`PK_codigo_producto`),
 FOREIGN KEY (`codigo_linea`)
 REFERENCES `empresarial`.`tbl_linea` (`PK_codigo_linea`),
-
-
 FOREIGN KEY (`codigo_marca`)
 REFERENCES `empresarial`.`tbl_marca` (`PK_codigo_marca`),   
-  
-
 FOREIGN KEY (`codigo_bodega`)
 REFERENCES `empresarial`.`tbl_bodega` (`PK_codigo_bodega`),
- 
-
 FOREIGN KEY (`codigo_unidad`)
 REFERENCES `empresarial`.`tbl_unidad` (`PK_codigo_unidad`)
-  ) ENGINE = InnoDB DEFAULT CHARACTER SET = utf8mb4;
-
+) ENGINE = InnoDB DEFAULT CHARACTER SET = utf8mb4;
 INSERT INTO `empresarial`.`tbl_producto` 
-VALUES ('1', 'planchas', 'ingreso 17/08/2021', '120', '120', '1', '2', '4', '4', '2'),
-('2', 'jugos', 'ingreso 12/09/2021', '12', '12', '1', '1', '5', '4', '1');
-
+VALUES 
+('1', 'base liquida', 'base liquida tono 2A', '800', '200', '1', '1', '1', '1', '1'),
+('2', 'jugo ', 'jugo naranja', '20', '10', '1', '2', '2', '2', '2'),
+('3', 'Frijoles', 'Frijol negro ducal', '25', '20', '1', '1', '2', '4', '2'),
+('4', 'Lapicero', 'Lapicero azul', '20', '10', '1', '5', '6', '2', '5'),
+('5', 'Television', 'Televisión LG 2000', '5000', '1000', '1', '2', '4', '5', '5'),
+('6', 'Tennis Deportivos', 'Tenis Nike Color Negro', '1000', '500', '1', '2', '4', '7', '5'),
+('7', 'SalAndrews', 'Medicamento', '20', '12', '1', '6', '3', '2', '5'),
+('8', 'Sombras de ojos', 'Sombra de ojos ', '500', '150', '1', '4', '4', '10', '5'),
+('9', 'Cafe frio', 'Caffe Moka Frio', '15', '12', '1', '10', '1', '8', '1'),
+('10', 'Pantalon de lona', 'Pantalon de lona azul dama', '300', '100', '1', '9', '4', '4', '5');
 
 -- -----------------------------------------------------
 -- Table `administracion`.`existencia`
 -- -----------------------------------------------------
+
 CREATE TABLE IF NOT EXISTS `empresarial`.`tbl_existencia` (
-`Pk_codigo_existencia` INT  NOT NULL,
 `Pk_codigo_producto` INT  NOT NULL,
 `Pk_codigo_bodega` INT  NOT NULL,
-`cantidad_existencia` INT (35) NULL DEFAULT NULL,
+`cantidad_existencia` INT NULL DEFAULT NULL,
 `fecha_entrada_existencia` DATE DEFAULT NULL,
 `fecha_salida_existencia` DATE DEFAULT NULL,
-`estatus_existencia` TINYINT(2) NOT NULL,
-  PRIMARY KEY ( 
-  Pk_codigo_existencia,
-  Pk_codigo_producto,
-  Pk_codigo_bodega
-),
-  FOREIGN KEY (`PK_codigo_producto`)
-  REFERENCES `empresarial`.`tbl_producto` (`PK_codigo_producto`),
-  FOREIGN KEY (`PK_codigo_bodega`)
-  REFERENCES `empresarial`.`tbl_bodega` (`PK_codigo_bodega`)
-  ) ENGINE = InnoDB DEFAULT CHARACTER SET = utf8mb4;
-
+`estatus_existencia` TINYINT NOT NULL,
+PRIMARY KEY ( 
+`Pk_codigo_producto`,
+`Pk_codigo_bodega`),
+FOREIGN KEY (`PK_codigo_producto`)
+REFERENCES `empresarial`.`tbl_producto` (`PK_codigo_producto`),
+FOREIGN KEY (`PK_codigo_bodega`)
+REFERENCES `empresarial`.`tbl_bodega` (`PK_codigo_bodega`)
+) ENGINE = InnoDB DEFAULT CHARACTER SET = utf8mb4;
 INSERT INTO `empresarial`.`tbl_existencia` 
 VALUES 
-('1', '1', '1', '10', '2021/10/5', '2021/10/2', '1'),
- ('2', '2', '2', '20', '2021/8/15', '2021/9/30', '1'),
-('3', '3', '3', '30', '2021/7/5', '2021/8/10', '1');
+( '1', '1', '10', '2021/10/5', '2021/10/2', '1'),
+('2', '2', '20', '2021/8/15', '2021/9/30', '1'),
+('3', '3', '30', '2021/7/5', '2021/8/10', '1');
 
 -- -----------------------------------------------------
--- Table `administracion`.`movimiento`
+-- Table `administracion`.`movimiento_encabezado_inventario`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `empresarial`.`tbl_movimiento` (
-`Pk_codigo_movimiento` INT  NOT NULL,
-
+CREATE TABLE IF NOT EXISTS `empresarial`.`tbl_movimiento_encabezado_inventario` (
+`Pk_codigo_movimiento_encabezado_inventario` INT  NOT NULL,
+`Pk_codigo_tipo_documento` INT  NOT NULL,
 `estatus_movimiento` TINYINT(2) NOT NULL,
   PRIMARY KEY ( 
-  Pk_codigo_movimiento
-)
+  Pk_codigo_movimiento_encabezado_inventario,
+ Pk_codigo_tipo_documento
+),
+FOREIGN KEY (Pk_codigo_tipo_documento) REFERENCES tbl_tipo_documento (Pk_codigo_tipo_documento)
   ) ENGINE = InnoDB DEFAULT CHARACTER SET = utf8mb4;
 
 -- -----------------------------------------------------
--- Table `administracion`.`movimiento_detalle`
+-- Table `administracion`.`movimiento_detalle_inventario`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `empresarial`.`tbl_movimiento_detalle` (
-`Pk_codigo_movimiento_detalle` INT  NOT NULL,
-
+CREATE TABLE IF NOT EXISTS `empresarial`.`tbl_movimiento_detalle_inventario` (
+`Pk_codigo_movimiento_detalle_inventario` INT  NOT NULL,
+`PK_codigo_producto` INT  NOT NULL,
 `estatus_movimiento_detalle` TINYINT(2) NOT NULL,
   PRIMARY KEY ( 
-  Pk_codigo_movimiento_detalle
-)
+  Pk_codigo_movimiento_detalle_inventario,
+   PK_codigo_producto
+),
+FOREIGN KEY (PK_codigo_producto) REFERENCES tbl_producto(PK_codigo_producto)
   ) ENGINE = InnoDB DEFAULT CHARACTER SET = utf8mb4;
+  
+  -- -----------------------------------------------------
+-- Table `empresarial`.`tipo_documento_inventario`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `empresarial`.`tbl_tipo_documento` (
+`Pk_codigo_tipo_documento` INT  NOT NULL,
+`nombre_tipo_documento` VARCHAR(35) NULL DEFAULT NULL,
+`estatus_tipo_documento` TINYINT(2) NOT NULL,
+  PRIMARY KEY ( Pk_codigo_tipo_documento)
+) ENGINE = InnoDB DEFAULT CHARACTER SET = utf8mb4;
   
 -- -----------------------------------------------------
 -- Table `administracion`.`proveedor`
