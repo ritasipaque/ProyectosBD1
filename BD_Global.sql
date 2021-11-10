@@ -127,7 +127,19 @@ VALUES
 ('7', 'samsung', '1'),
 ('8', 'bebidas', '1'),
 ('9', 'ropa ', '1'),
-('10', 'Coffe', '1');
+('10', 'Coffe', '1'),
+('11', 'Comida', '1'),
+('12', 'Enbultidos', '1'),
+('13', 'Dos Pinos', '1'),
+('14', 'Carnes', '1'),
+('15', 'Harinas', '1'),
+('16', 'Fruta', '1'),
+('17', 'Salsa', '1'),
+('18', 'Verdura', '1'),
+('19', 'Pan', '1'),
+('20', 'Granos', '1'),
+('21', 'Fideos', '1');
+
 
 CREATE TABLE IF NOT EXISTS `empresarial`.`tbl_marca` (
 `PK_codigo_marca` INT  NOT NULL,
@@ -146,7 +158,18 @@ VALUES
 ('7', 'la granja', '1'),
 ('8', 'bimbo', '1'),
 ('9', 'claro ', '1'),
-('10', 'splash', '1');
+('10', 'splash', '1'),
+('11', 'Toledo', '1'),
+('12', 'Bremen', '1'),
+('13', 'Virginia', '1'),
+('14', 'FUD', '1'),
+('15', 'Dos Pinos Pizza', '1'),
+('16', 'Natural', '1'),
+('17', 'Piña´s', '1'),
+('18', 'Hambueguesa', '1'),
+('19', 'Hass', '1'),
+('20', 'La Chula', '1');
+
 
 CREATE TABLE IF NOT EXISTS `empresarial`.`tbl_bodega` (
 `PK_codigo_bodega` INT  NOT NULL,
@@ -247,9 +270,22 @@ INSERT INTO
 ('5', 'Television', 'Televisión LG 2000', '5000', '1000', '1', '2', '4', '5', '5'),
 ('6', 'Tennis Deportivos', 'Tenis Nike Color Negro', '1000', '500', '1', '2', '4', '7', '5'),
 ('7', 'SalAndrews', 'Medicamento', '20', '12', '1', '6', '3', '2', '5'),
-('8', 'Sombras de ojos', 'Sombra de ojos ', '500', '150', '1', '4', '4', '10', '5'),
+('8', 'Tortilla', 'Tortilla de harina', '200', '50', '1', '15', '16', '2', '5'),
 ('9', 'Cafe frio', 'Caffe Moka Frio', '15', '12', '1', '10', '1', '8', '1'),
-('10', 'Pantalon de lona', 'Pantalon de lona azul dama', '300', '100', '1', '9', '4', '4', '5');
+('10', 'Harina', 'Harina para tacos', '300', '100', '1', '15', '16', '2', '3'),
+('11', 'Carne Molida', 'Carne Molida', '80', '20', '1', '14', '13', '1', '2'),
+('12', 'Queso', 'Queso Mozarella', '100', '40', '1', '13', '15', '2', '5'),
+('13', 'Peperoni', 'Peperoni ', '120', '80', '1', '11', '13', '2', '5'),
+('14', 'Salsa', 'Salsa de Tomate', '200', '80', '1', '17', '16', '2', '5'),
+('15', 'Harina ', 'Harina para Pizza', '200', '80', '1', '15', '16', '2', '2'),
+('16', 'Piña', 'Piña dulce', '100', '80', '1', '16', '17', '2', '5'),
+('17', 'Harina', 'Harina para tortilla', '100', '70', '1', '15', '8', '2', '2'),
+('18', 'Aguacate', 'Aguacate Mexicano', '100', '80', '1', '18', '19', '2', '2'),
+('19', 'Pan', 'Pan para hamburguesa', '120', '80', '1', '19', '18', '2', '5'),
+('20', 'Fideos', 'Fideos para lasagna', '100', '80', '1', '21', '16', '2', '5'),
+('21', 'frijol', 'Frijol Volteado', '200', '90', '1', '20', '20', '2', '5'),
+('22', 'lechuga', 'lechuga grande', '150', '90', '1', '18', '16', '2', '2');
+
 
 
 CREATE TABLE IF NOT EXISTS `empresarial`.`tbl_existencia` (
@@ -1393,6 +1429,24 @@ FROM empresarial.tbl_asignacion_gobernanta
 WHERE PK_id_gobernanta=idGobernanta;
 END$$
 DELIMITER ;
+
+
+
+-- ----------------------area administrativa--------3
+DELIMITER $$
+USE `empresarial`$$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `pa_limite_stock`()
+BEGIN 
+select * from tbl_existencia
+   where cantidad_existencia<=20;
+
+END$$
+
+DELIMITER ;
+;
+call empresarial.pa_limite_stock();
+
+
 
 -- -------------------------
 -- FUNCIONES ALMACENADAS
